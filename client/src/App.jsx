@@ -20,7 +20,7 @@ function App() {
           </Routes>
         </main>
         <footer className={styles.footer}>
-          <p>&copy; 2024 My App</p>
+          <p>&copy; 2026 My App</p>
         </footer>
       </div>
     </BrowserRouter>

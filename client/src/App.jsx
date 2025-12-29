@@ -1,3 +1,4 @@
+import FileHandler from './components/FileHandler/FileHandler';
 import { BrowserRouter, Routes, Route, Link } from 'react-router'
 import Home from './pages/HomePage/HomePage';
 import styles from './styles/App.module.css';
@@ -9,6 +10,7 @@ function App() {
     <BrowserRouter>
       <div className={styles.app}>
         <header className={styles.appHeader}>
+          <FileHandler />
           <img src={projectLogo} alt="Logo" className={styles.appLogo} />
           <nav className={styles.appNav}>
             <Link to="/" className={styles.appLink}>Home</Link>

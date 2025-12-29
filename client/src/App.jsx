@@ -10,13 +10,13 @@ function App() {
     <BrowserRouter>
       <div className={styles.app}>
         <header className={styles.appHeader}>
-          <FileHandler />
           <img src={projectLogo} alt="Logo" className={styles.appLogo} />
           <nav className={styles.appNav}>
             <Link to="/" className={styles.appLink}>Home</Link>
           </nav>
         </header>
         <main className={styles.main}>
+          <FileHandler />
           <Routes>
             <Route path="/" element={<Home />} />
           </Routes>

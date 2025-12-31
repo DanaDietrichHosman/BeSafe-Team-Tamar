@@ -1,0 +1,25 @@
+.fileSelectorContainer {
+  margin: 20px 0;
+  text-align: center;
+}
+
+.label {
+  font-weight: 500;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.fileInput {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #fafafa;
+  cursor: pointer;
+  transition: border-color 0.3s ease;
+}
+
+.fileInput:hover {
+  border-color: #d63384;
+}

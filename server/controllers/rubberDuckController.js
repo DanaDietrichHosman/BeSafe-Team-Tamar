@@ -1,72 +1,54 @@
-import ducks from '../data/duckData.js';
+import Content from "../models/content.js";
 
-// Get all ducks
-const getAllDucks = (req, res) => {
-    res.status(200).json({ ducks });
+/*
+  סימולציה של Gemini
+  בהמשך מחליפים ל-API אמיתי
+*/
+const analyzeWithGemini = async (inputText) => {
+  console.log("Text sent to Gemini:", inputText); // שימוש אמיתי
+
+  return [
+    {
+      word: "קללה",
+      count: 5,
+      category: "אלימות מילולית",
+    },
+    {
+      word: "אידיוט",
+      count: 2,
+      category: "השפלה",
+    },
+  ];
 };
 
-// Get a random duck
-const getRandomDuck = (req, res) => {
-    const randomIndex = Math.floor(Math.random() * ducks.length);
-    res.status(200).json(ducks[randomIndex]);
-};
+export const analyzeText = async (req, res) => {
+  try {
+    const { text, title } = req.body;
 
-// Get a single duck
-const getSingleDuck = (req, res) => {
-    const id = parseInt(req.params.id, 10);
-    const duck = ducks.find(d => d.id === id);
-
-    if (!duck) {
-        return res.status(404).json({ mssg: "Duck not found" });
-    }
-    res.status(200).json({ duck });
-};
-
-// Create a new duck
-const createDuck = (req, res) => {
-    const { name, color, imageUrl } = req.body;
-    const newDuck = {
-        id: ducks.length ? ducks[ducks.length - 1].id + 1 : 1,
-        name,
-        color,
-        imageUrl
-    };
-    ducks.push(newDuck);
-    res.status(201).json({ duck: newDuck });
-};
-
-// Delete a duck
-const deleteDuck = (req, res) => {
-    const id = parseInt(req.params.id, 10);
-    const duckIndex = ducks.findIndex(d => d.id === id);
-
-    if (duckIndex === -1) {
-        return res.status(404).json({ mssg: "Duck not found" });
+    if (!text) {
+      return res.status(400).json({ message: "Text is required" });
     }
 
-    const [deletedDuck] = ducks.splice(duckIndex, 1);
-    res.status(200).json({ duck: deletedDuck });
-};
+    // 1️⃣ ניתוח
+    const analysis = await analyzeWithGemini(text);
 
-// Update a duck
-const updateDuck = (req, res) => {
-    const id = parseInt(req.params.id, 10);
-    const duckIndex = ducks.findIndex(d => d.id === id);
+    // 2️⃣ התאמה ל-DB
+    const dataToSave = analysis.map((item) => ({
+      title: title || "Chat Analysis",
+      word: item.word,
+      count: item.count,
+      category: item.category,
+    }));
 
-    if (duckIndex === -1) {
-        return res.status(404).json({ mssg: "Duck not found" });
-    }
+    // 3️⃣ שמירה למונגו
+    await Content.insertMany(dataToSave);
 
-    const updatedDuck = { ...ducks[duckIndex], ...req.body };
-    ducks[duckIndex] = updatedDuck;
-    res.status(200).json({ duck: updatedDuck });
-};
-
-export {
-    getAllDucks,
-    getRandomDuck,
-    getSingleDuck,
-    createDuck,
-    deleteDuck,
-    updateDuck
+    // 4️⃣ החזרה לפרונט
+    res.status(200).json({
+      success: true,
+      data: dataToSave,
+    });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
 };

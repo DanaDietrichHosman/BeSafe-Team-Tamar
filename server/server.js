@@ -1,29 +1,27 @@
-import express from 'express';
-import path from 'path';
-import { fileURLToPath } from 'url';
-import cors from 'cors';
-import dotenv from 'dotenv';
-import rubberDuckRoutes from './routes/rubberDucks.js'; // Import the routes
+import express from "express";
+import cors from "cors";
+import mongoose from "mongoose";
+import dotenv from "dotenv";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+import analyzeRoutes from "./routes/rubberDucks.js";
 
 dotenv.config();
 
 const app = express();
 
+app.use(cors());
 app.use(express.json());
-app.use('/images', express.static(path.join(__dirname, 'images'))); // Serve static images
 
-app.use(cors({
-  origin: process.env.CLIENT_URL
-}));
+// חיבור ל-MongoDB
+mongoose
+  .connect("mongodb://127.0.0.1:27017/text-analysis")
+  .then(() => console.log("MongoDB connected"))
+  .catch((err) => console.error(err));
 
-// Use the routes file for all `/ducks` routes
-app.use('/ducks', rubberDuckRoutes);
+// Routes
+app.use("/api", analyzeRoutes);
 
-// Start server
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+  console.log(`Server running on port ${PORT}`);
 });

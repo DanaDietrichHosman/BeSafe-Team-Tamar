@@ -3,6 +3,7 @@ import UploadSection from '../../components/UploadSection/UploadSection';
 import ResultsSection from '../../components/ResultsSection/ResultsSection';
 import { useAnalysis } from '../../context/useAnalysis'; // שימוש ב-Hook החדש
 import styles from './Home.module.css';
+import FileSelector from "../../components/FileSelector/FileSelector";
 
 const Home = () => {
   // מושכים את כל הנתונים והפונקציות מה-Context
@@ -12,14 +13,10 @@ const Home = () => {
     analysisResult, setAnalysisResult 
   } = useAnalysis();
 
-  const handleFileUpload = (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (e) => setChatText(e.target.result); // עדכון ה-Context
-      reader.readAsText(file);
-    }
-  };
+  const handleFileReady = (cleanedText) => {
+    console.log("Cleaned text received in Home!"); // Add this to test
+    setChatText(cleanedText); 
+};
 
   const handleAnalyze = () => {
     if (!chatText) {
@@ -40,11 +37,13 @@ const Home = () => {
     <div className={styles.homeContainer}>
       <Header />
       <UploadSection 
-        onFileUpload={handleFileUpload} 
         onAnalyze={handleAnalyze} 
         isLoading={isLoading} 
-      />
-      {/* מציג תוצאות אם קיים מידע ב-analysisResult ב-Context */}
+      >
+        {/* Use your component here instead of the old onFileUpload prop */}
+        <FileSelector onFileReady={handleFileReady} />
+      </UploadSection>
+
       {analysisResult && <ResultsSection />}
     </div>
   );

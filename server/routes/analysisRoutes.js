@@ -3,7 +3,7 @@ import express from "express";
 //import mongoose from "mongoose";
 import dotenv from "dotenv";
 
-import { analyzeText } from "../controllers/rubberDuckController.js";
+import { analyzeText } from "../controllers/analysisController.js";
 dotenv.config();
 
 

@@ -9,10 +9,6 @@ const contentSchema = new mongoose.Schema({
   count: {
     type: Number,
     required: true
-  },
-  category: {
-    type: String,
-    required: true
   }
 });
 

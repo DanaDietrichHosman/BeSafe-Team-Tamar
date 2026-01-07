@@ -5,11 +5,11 @@ import { useAnalysis } from '../../context/useAnalysis'; // שימוש ב-Hook �
 import styles from './Home.module.css';
 
 const Home = () => {
-  // מושכים את כל הנתונים והפונקציות מה-Context
   const { 
     chatText, setChatText, 
-    isLoading, setIsLoading, 
-    analysisResult, setAnalysisResult 
+    isLoading, 
+    analysisResult,
+    runAnalysis // מושכים את הפונקציה החדשה מה-Context
   } = useAnalysis();
 
   const handleFileUpload = (event) => {
@@ -24,17 +24,11 @@ const Home = () => {
   const handleAnalyze = () => {
     if (!chatText) {
       alert("Please upload a file first!");
-      return;
-    }
-    
-    setIsLoading(true); // עדכון ה-Context
-    setAnalysisResult(null); // איפוס תוצאות קודמות ב-Context
-
-    setTimeout(() => {
-      setIsLoading(false);
-      setAnalysisResult("Analysis ready!"); // שמירת התוצאה ב-Context
-    }, 2000);
-  };
+        return;
+      }
+      
+      runAnalysis(); 
+    };
 
   return (
     <div className={styles.homeContainer}>

@@ -5,7 +5,7 @@ import styles from './UploadSection.module.css';
 const UploadSection = ({ onFileUpload, onAnalyze, isLoading }) => {
   return (
     <div className={styles.uploadBox}>
-      <h2 className={styles.stepTitle}>Step 1: Upload Chat</h2>
+      <h2 className={styles.stepTitle}>Upload Chat</h2>
       
       <div className={styles.instructions}>
         <b className={styles.instructionTitle}>How to export your chat:</b>

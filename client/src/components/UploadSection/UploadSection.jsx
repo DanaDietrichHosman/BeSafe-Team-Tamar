@@ -19,7 +19,7 @@ const UploadSection = ({ onFileUpload, onAnalyze, isLoading }) => {
       </div>
 
       {/* שימוש בקומפוננטה החדשה */}
-      <FileSelector onFileChange={onFileUpload} />
+      <FileSelector onFileReady={onFileUpload} />
 
       <button 
         onClick={onAnalyze} 

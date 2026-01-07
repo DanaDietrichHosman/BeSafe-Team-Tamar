@@ -23,3 +23,27 @@
 .fileInput:hover {
   border-color: #d63384;
 }
+
+.previewBox {
+  margin-top: 15px;
+  background-color: #f8f9fa;
+  max-height: 150px;
+  overflow-y: auto;
+  text-align: left;
+  padding: 12px;
+  font-size: 0.85rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+.previewTitle {
+  color: #d63384;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.previewText {
+  white-space: pre-wrap;
+  color: #444;
+  margin: 0;
+}

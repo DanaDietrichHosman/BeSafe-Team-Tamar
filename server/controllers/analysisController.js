@@ -1,14 +1,12 @@
 import Content from "../models/content.js";
 
 /**
- * קונטרולר לניהול שמירת נתוני ניתוח הצ'אט
+ * שמירת תוצאות ניתוח ה-AI למסד הנתונים
  */
 export const analyzeText = async (req, res) => {
   try {
-    // אנחנו מצפים לקבל את מערך המילים הפוגעניות ישירות מהפרונטד
     const { offensiveWords } = req.body; 
 
-    // בדיקה שהתקבלו נתונים תקינים
     if (!offensiveWords || !Array.isArray(offensiveWords)) {
       return res.status(400).json({ 
         success: false, 
@@ -16,17 +14,15 @@ export const analyzeText = async (req, res) => {
       });
     }
 
-    // 1️⃣ התאמה למבנה ה-DB (ללא קטגוריות, כפי שביקשתן)
+    // מיפוי הנתונים לשמירה ללא קטגוריות
     const dataToSave = offensiveWords.map((item) => ({
       word: item.word,
       count: item.count
     }));
 
-    // 2️⃣ שמירה למסד הנתונים MongoDB
-    // insertMany שומר את כל המערך בפעולה אחת
+    // שמירה בבת אחת ל-MongoDB
     const savedData = await Content.insertMany(dataToSave);
 
-    // 3️⃣ החזרת תשובה חיובית ללקוח (Client)
     res.status(200).json({
       success: true,
       message: "Analysis results saved successfully to database",

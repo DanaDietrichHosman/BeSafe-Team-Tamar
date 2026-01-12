@@ -75,12 +75,13 @@
   text-align: left;
 }
 
+/* ResultsSection.module.css */
 .chartContainer {
   width: 100%;
-  height: 350px;
-  margin-top: 30px;
-  padding-top: 20px;
-  position: relative;
+  height: 350px; /* הגובה המדויק שפותר את השגיאה ב-Console */
+  min-height: 300px;
+  margin: 20px 0;
+  display: block; /* מבטיח שהמיכל יתפוס מקום */
 }
 
 .recommendationBox {

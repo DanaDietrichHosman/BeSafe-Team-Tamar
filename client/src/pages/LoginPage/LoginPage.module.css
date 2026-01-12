@@ -1,0 +1,104 @@
+.loginContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+  direction: ltr; /* שינוי לשמאל לימין עבור אנגלית */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.loginBox {
+  background: #ffffff;
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.loginBox h2 {
+  margin-bottom: 25px;
+  color: #d63384; /* צבע המותג */
+  font-size: 1.8rem;
+  font-weight: 800;
+}
+
+.inputField {
+  width: 100%;
+  padding: 12px 15px;
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+.inputField:focus {
+  outline: none;
+  border-color: #d63384;
+}
+
+.loginBtn {
+  width: 100%;
+  padding: 12px;
+  background-color: #d63384; /* צבע המותג */
+  color: white;
+  border: none;
+  border-radius: 50px; /* עיצוב עגול כמו כפתור האנליזה */
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(214, 51, 132, 0.2);
+}
+
+.loginBtn:hover {
+  background-color: #c22074;
+  transform: translateY(-2px);
+}
+
+.linkButton {
+  background: none;
+  border: none;
+  color: #d63384;
+  text-decoration: underline;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 0;
+  font-family: inherit;
+}
+
+.logoWrapper {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.bigLogo {
+  width: 120px; /* גודל הלוגו */
+  height: 120px;
+  border-radius: 50%; /* הופך את התמונה לעגולה */
+  border: 4px solid #ffdce8; /* מסגרת ורודה דקה שתואמת למותג */
+  object-fit: cover;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* שאר הסטיילים הקיימים שלך נשארים אותו דבר... */
+.loginContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+  direction: ltr;
+}
+
+.loginBox {
+  background: #ffffff;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}

@@ -1,15 +1,40 @@
 import mongoose from "mongoose";
 
 const contentSchema = new mongoose.Schema({
-  word: {
+  // שיוך למשתמש לצורך היסטוריה (מהקובץ של החברה)
+  userEmail: {
     type: String,
-    required: true
+    required: true,
+    index: true // מוסיף אינדקס לחיפוש מהיר של היסטוריה
   },
-  count: {
+  
+  // תוצאות הניתוח המפורטות (מהקובץ של החברה)
+  analysisData: [
+    {
+      word: { type: String, required: true },
+      count: { type: Number, required: true }
+    }
+  ],
+
+  // שדות נוספים מהניתוח שלך (חשוב להיסטוריה מלאה)
+  riskLevel: {
     type: Number,
-    required: true
+    default: 0
+  },
+  
+  contextAnalysis: {
+    type: String
+  },
+  
+  recommendation: {
+    type: String
+  },
+
+  // תאריך יצירה לצורך מיון ההיסטוריה מהחדש לישן
+  createdAt: {
+    type: Date,
+    default: Date.now
   }
-  // שדה ה-category הוסר מכאן כדי להתאים לבקשתכן
 });
 
 export default mongoose.model("Content", contentSchema);

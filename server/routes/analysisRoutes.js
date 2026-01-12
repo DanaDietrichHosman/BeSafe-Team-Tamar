@@ -1,17 +1,18 @@
 import express from "express";
-//import cors from "cors";
-//import mongoose from "mongoose";
-import dotenv from "dotenv";
-
-import { analyzeText } from "../controllers/analysisController.js";
-dotenv.config();
-
-
+import { analyzeText, getUserHistory } from "../controllers/analysisController.js";
 
 const router = express.Router();
 
-// POST http://localhost:5000/api/analyze
+/**
+ * @route   POST /api/analyze
+ * @desc    Analyze chat text and save results
+ */
 router.post("/analyze", analyzeText);
 
+/**
+ * @route   GET /api/history/:email
+ * @desc    Fetch analysis history for a specific user
+ */
+router.get("/history/:email", getUserHistory);
 
 export default router;

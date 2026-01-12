@@ -1,24 +1,46 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { AnalysisContext } from './AnalysisContext'; 
-import api from '../services/api'; // הייבוא של ה-Axios Instance שלך
+import api from '../services/api'; 
 
 export const AnalysisProvider = ({ children }) => {
   const [chatText, setChatText] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [analysisResult, setAnalysisResult] = useState(null);
 
+  // --- תוספת חדשה: ניהול משתמש מחובר ---
+  const [user, setUser] = useState(null);
+
+  // פונקציה שנקרא לה מתוך דף ה-Login
+  const loginUser = (userData) => {
+    setUser(userData); // שומר את האובייקט { name, email } בזיכרון
+  };
+
+  // פונקציה להתנתקות
+  const logoutUser = () => {
+    setUser(null);
+    setAnalysisResult(null);
+    setChatText("");
+  };
+
   const runAnalysis = async () => {
     if (!chatText) return;
+
+    // הגנה: אם המשתמש לא מחובר, הוא לא יכול לנתח (כי לא יהיה איפה לשמור היסטוריה)
+    if (!user) {
+      alert("Please log in first to analyze your chat.");
+      return;
+    }
     
     setIsLoading(true);
-    setAnalysisResult(null); // איפוס תוצאות קודמות למניעת דיליי ויזואלי
+    setAnalysisResult(null); 
     console.log("Starting Full-Stack Analysis via Server...");
 
     try {
-      // שימוש ב-Axios במקום ב-fetch
+      // עדכון קריטי: שליחת הטקסט יחד עם האימייל של המשתמש
       const response = await api.post("/api/analyze", { 
-        text: chatText 
+        text: chatText,
+        userEmail: user.email // המידע הזה נשלח עכשיו לשרת כדי שיישמר בהיסטוריה
       });
 
       if (response.data.success) {
@@ -29,7 +51,6 @@ export const AnalysisProvider = ({ children }) => {
     } catch (error) {
       console.error("Workflow Error:", error);
       
-      // טיפול ספציפי בשגיאת המכסה (429) שראינו בטרמינל
       if (error.response && error.response.status === 429) {
         alert("Gemini AI quota exceeded. Please wait a minute or use a different API key.");
       } else {
@@ -45,7 +66,11 @@ export const AnalysisProvider = ({ children }) => {
       chatText, setChatText, 
       isLoading, setIsLoading, 
       analysisResult, setAnalysisResult,
-      runAnalysis 
+      runAnalysis,
+      // חשיפת המשתמש והפונקציות החדשות לכל דפי האתר
+      user, 
+      loginUser, 
+      logoutUser 
     }}>
       {children}
     </AnalysisContext.Provider>

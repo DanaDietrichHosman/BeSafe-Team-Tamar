@@ -1,0 +1,77 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+  direction: ltr; /* English direction */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.box {
+  background: #ffffff;
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.box h2 {
+  margin-bottom: 25px;
+  color: #d63384; /* Brand Pink */
+  font-size: 1.8rem;
+  font-weight: 800;
+}
+
+.input {
+  width: 100%;
+  padding: 12px 15px;
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease;
+}
+
+.input:focus {
+  outline: none;
+  border-color: #d63384;
+}
+
+.btn {
+  width: 100%;
+  padding: 12px;
+  background-color: #d63384; /* Consistent with Analysis button */
+  color: white;
+  border: none;
+  border-radius: 50px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(214, 51, 132, 0.2);
+}
+
+.btn:hover {
+  background-color: #c22074;
+  transform: translateY(-2px);
+}
+
+.linkText {
+  color: #d63384;
+  cursor: pointer;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.linkText:hover {
+  color: #c22074;
+}
+
+p {
+  margin-top: 20px;
+  color: #7f8c8d;
+  font-size: 0.9rem;
+}

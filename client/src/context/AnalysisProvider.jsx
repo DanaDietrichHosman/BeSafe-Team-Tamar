@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { AnalysisContext } from './AnalysisContext'; 
-import { analyzeChatWithGemini } from '../services/geminiService'; 
+import api from '../services/api'; // הייבוא של ה-Axios Instance שלך
 
 export const AnalysisProvider = ({ children }) => {
   const [chatText, setChatText] = useState("");
@@ -12,37 +12,29 @@ export const AnalysisProvider = ({ children }) => {
     if (!chatText) return;
     
     setIsLoading(true);
-    setAnalysisResult(null);
-    console.log("Analysis started...");
+    setAnalysisResult(null); // איפוס תוצאות קודמות למניעת דיליי ויזואלי
+    console.log("Starting Full-Stack Analysis via Server...");
 
     try {
-      // 1️⃣ שלב א': ניתוח הטקסט מול ה-AI (Gemini)
-      const result = await analyzeChatWithGemini(chatText); 
-      console.log("Gemini Success! Result:", result);
-      setAnalysisResult(result);
-
-      // 2️⃣ שלב ב': שליחת התוצאות לשרת ה-Node.js כדי לשמור ב-MongoDB
-      // אנחנו שולחים את המערך offensiveWords כפי שהשרת מצפה לקבל
-      console.log("Saving to local database...");
-      const response = await fetch("http://localhost:5000/api/analyze", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ 
-          offensiveWords: result.offensiveWords 
-        })
+      // שימוש ב-Axios במקום ב-fetch
+      const response = await api.post("/api/analyze", { 
+        text: chatText 
       });
 
-      if (!response.ok) {
-        throw new Error("Server failed to save analysis results.");
+      if (response.data.success) {
+        console.log("Analysis Received:", response.data.data);
+        setAnalysisResult(response.data.data);
       }
-
-      const serverData = await response.json();
-      console.log("Full-Stack Success! Data saved in DB:", serverData);
 
     } catch (error) {
       console.error("Workflow Error:", error);
-      // מציגים שגיאה ידידותית למשתמש
-      alert("Analysis failed. Please make sure the server (Port 5000) and MongoDB are running.");
+      
+      // טיפול ספציפי בשגיאת המכסה (429) שראינו בטרמינל
+      if (error.response && error.response.status === 429) {
+        alert("Gemini AI quota exceeded. Please wait a minute or use a different API key.");
+      } else {
+        alert("Connection to server failed. Ensure Node.js and MongoDB are running.");
+      }
     } finally {
       setIsLoading(false);
     }

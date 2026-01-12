@@ -1,49 +1,80 @@
-/* App.module.css */
-.app {
-  text-align: center;
-}
 
 .appHeader {
   background-color: #53474F;
-  padding: 5px 30px 5px 30px;
+  padding: 10px 50px;
   color: white;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-between; /* יוצר את הרווח בין הלוגו לתפריט */
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.logoContainer {
+  display: flex;
+  align-items: center;
+  gap: 15px;
 }
 
 .appLogo {
-  height: 100px;
+  height: 60px;
+  border-radius: 50%;
+  border: 2px solid #FFDCE8;
+}
+
+.brandName {
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: #FFDCE8;
 }
 
 .appNav {
   display: flex;
-  gap: 20px;
+  align-items: center;
+  gap: 30px;
 }
 
 .appLink {
   color: white;
   text-decoration: none;
-  font-size: 1.2em;
+  font-size: 1.1rem;
+  font-weight: 500;
+  transition: color 0.3s ease;
 }
 
 .appLink:hover {
-  text-decoration: underline;
+  color: #FFDCE8;
+}
+
+/* עיצוב כפתור החירום בתוך הבר */
+.emergencyBtnNav {
+  background-color: #ff4d6d;
+  padding: 8px 18px;
+  border-radius: 25px;
+  font-weight: bold;
+  box-shadow: 0 4px 8px rgba(255, 77, 109, 0.3);
+  transition: transform 0.2s ease;
+}
+
+.emergencyBtnNav:hover {
+  background-color: #ff1f4b;
+  color: white;
+  transform: scale(1.05);
+  text-decoration: none;
 }
 
 .main {
-  padding: 20px;
+  flex: 1;
+  padding: 40px 20px;
   background-color: #FFDCE8;
-  height: 100vh;
+  min-height: calc(100vh - 80px); /* מבטיח שהרקע הוורוד ימלא את הדף */
 }
 
 .footer {
-  padding: 10px;
+  padding: 15px;
   background-color: #53474F;
   color: white;
-  position: fixed;
-  width: 100%;
-  bottom: 0;
   text-align: center;
 }
-  

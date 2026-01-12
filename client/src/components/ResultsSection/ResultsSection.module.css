@@ -1,37 +1,129 @@
 .resultsBox {
   margin-top: 40px;
-  padding: 30px;
+  padding: 40px;
   background-color: #fff;
   border-radius: 15px;
-  max-width: 800px;
+  max-width: 900px;
   margin-left: auto;
   margin-right: auto;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-  border: 1px solid #eee;
-  text-align: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  border: 1px solid #eaeaea;
+  text-align: left;
+  direction: ltr; 
 }
 
 .title {
-  color: #d63384;
-  margin-bottom: 10px;
+  color: #1a202c;
+  margin-bottom: 30px;
+  font-size: 2rem;
+  font-weight: 800;
+}
+
+.scoreSection {
+  background-color: #fcfcfc;
+  padding: 25px;
+  border-radius: 12px;
+  border-left: 6px solid #ccc; /* הצבע יוזרק דינמית מה-JSX */
+  margin-bottom: 35px;
+  box-shadow: inset 0 0 10px rgba(0,0,0,0.02);
+}
+
+.scoreHeader {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.scoreBadge {
+  color: white;
+  padding: 10px 22px;
+  border-radius: 50px;
+  font-weight: 800;
+  font-size: 1.1rem;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+.riskStatus {
+  font-weight: 900;
+  font-size: 1.3rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.contextBox {
+  border-top: 1px solid #efefef;
+  padding-top: 15px;
+}
+
+.contextLabel {
+  font-weight: 700;
+  color: #2d3748;
+}
+
+.analysisText {
+  color: #4a5568;
+  line-height: 1.8;
+  margin: 0;
+  font-size: 1.05rem;
 }
 
 .subtitle {
-  color: #666;
-  margin-bottom: 30px;
-  font-size: 0.95rem;
+  color: #718096;
+  margin-bottom: 20px;
+  font-size: 1rem;
+  text-align: left;
 }
 
 .chartContainer {
   width: 100%;
-  height: 300px;
-  margin-top: 20px;
+  height: 350px;
+  margin-top: 30px;
+  padding-top: 20px;
+  position: relative;
 }
 
-.noData {
-  padding: 20px;
-  color: #28a745;
-  background-color: #f4fff6;
-  border-radius: 8px;
-  font-weight: bold;
+.recommendationBox {
+  margin-top: 35px;
+  padding: 25px;
+  background-color: #ebf8ff;
+  border: 1px solid #bee3f8;
+  border-radius: 12px;
+  text-align: left;
+}
+
+.recommendationBox h4 {
+  color: #2b6cb0;
+  margin-top: 0;
+  margin-bottom: 12px;
+  font-size: 1.1rem;
+}
+
+.recommendationBox p {
+  color: #2c5282;
+  margin: 0;
+  line-height: 1.6;
+}
+
+.loadingContainer {
+  padding: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid #f3f3f3;
+  border-top: 5px solid #d63384;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }

@@ -1,39 +1,51 @@
 import Content from "../models/content.js";
+import { analyzeChatWithGemini } from "../services/geminiService.js";
 
-/**
- * שמירת תוצאות ניתוח ה-AI למסד הנתונים
- */
 export const analyzeText = async (req, res) => {
   try {
-    const { offensiveWords } = req.body; 
-
-    if (!offensiveWords || !Array.isArray(offensiveWords)) {
-      return res.status(400).json({ 
-        success: false, 
-        message: "No analysis data provided (offensiveWords array is missing)" 
-      });
+    const { text } = req.body;
+    
+    if (!text) {
+      return res.status(400).json({ success: false, message: "No text provided" });
     }
 
-    // מיפוי הנתונים לשמירה ללא קטגוריות
-    const dataToSave = offensiveWords.map((item) => ({
-      word: item.word,
-      count: item.count
-    }));
+    // 1. קריאה ל-Gemini - חשוב לוודא שהשירות מחזיר את האובייקט המלא
+    const analysis = await analyzeChatWithGemini(text);
 
-    // שמירה בבת אחת ל-MongoDB
-    const savedData = await Content.insertMany(dataToSave);
+    // 2. חילוץ בטוח של הנתונים
+    const offensiveWords = analysis?.offensiveWords || [];
+    const RiskLevel = analysis?.RiskLevel || 100;
+    const contextAnalysis = analysis?.contextAnalysis || "Analysis unavailable";
+    const recommendation = analysis?.recommendation || "No recommendation";
 
+    // 3. איפוס מסד הנתונים
+    await Content.deleteMany({});
+    
+    // 4. שמירה ל-DB לצורך הטבלה בפורט 5000
+    if (offensiveWords.length > 0) {
+      const dataToSave = offensiveWords.map(item => ({
+        word: item.word,
+        count: item.count
+      }));
+      await Content.insertMany(dataToSave);
+    }
+
+    // 5. שליחת התשובה המלאה - שימי לב למבנה ה-data
     res.status(200).json({
       success: true,
-      message: "Analysis results saved successfully to database",
-      count: savedData.length
+      data: { 
+        offensiveWords,
+        RiskLevel,
+        contextAnalysis,
+        recommendation
+      }
     });
 
   } catch (error) {
-    console.error("Server Error:", error);
+    console.error("Analysis Controller Error:", error);
     res.status(500).json({ 
       success: false, 
-      error: error.message 
+      error: error.message || "Internal Server Error" 
     });
   }
 };

@@ -5,38 +5,19 @@ import { useAnalysis } from '../../context/useAnalysis';
 import styles from './Home.module.css';
 
 const Home = () => {
-  const { 
-    chatText, setChatText, 
-    isLoading, 
-    analysisResult,
-    runAnalysis 
-  } = useAnalysis();
-
-  const handleFileReady = (cleanedText) => {
-    console.log("Cleaned text received in Home!"); 
-    setChatText(cleanedText); 
-  };
-
-  const handleAnalyze = () => {
-    if (!chatText) {
-      alert("Please upload a file first!");
-      return;
-    }
-    runAnalysis(); 
-  };
+  // אנחנו צריכים רק את analysisResult כדי לדעת אם להציג את רכיב התוצאות
+  // ואת isLoading כדי להציג את התוצאות (או ה-Spinner) בזמן אמת
+  const { analysisResult, isLoading } = useAnalysis();
 
   return (
     <div className={styles.homeContainer}>
       <Header />
       
-      {/* עדכון כאן: מעבירים את handleFileReady ל-onFileUpload */}
-      <UploadSection 
-        onFileUpload={handleFileReady} 
-        onAnalyze={handleAnalyze} 
-        isLoading={isLoading} 
-      />
+      {/* ה-UploadSection עכשיו עצמאי ומושך הכל מה-Context */}
+      <UploadSection />
 
-      {analysisResult && <ResultsSection />}
+      {/* מציגים את ה-ResultsSection אם יש תוצאות או אם אנחנו בתהליך טעינה */}
+      {(analysisResult || isLoading) && <ResultsSection />}
     </div>
   );
 };

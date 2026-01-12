@@ -1,0 +1,104 @@
+.aboutContainer {
+  padding: 60px 20px;
+  max-width: 1000px; /* הגדלנו מעט כדי שכרטיסי הצוות יכנסו יפה */
+  margin: 0 auto;
+  text-align: center;
+  direction: ltr; /* English direction */
+}
+
+.title {
+  color: #d63384;
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  font-weight: 800;
+}
+
+.description {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  color: #444;
+  margin-bottom: 40px;
+}
+
+.missionCard {
+  margin-top: 40px;
+  padding: 30px;
+  background-color: #fdf2f8;
+  border-radius: 15px;
+  border-left: 5px solid #d63384;
+  text-align: left; /* יישור טקסט לשמאל בתוך הכרטיס */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+}
+
+.cardTitle {
+  color: #d63384;
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+/* עיצוב הצוות - Meet the Developers */
+.teamTitle {
+  margin-top: 60px;
+  margin-bottom: 30px;
+  font-size: 2rem;
+  color: #2c3e50;
+}
+
+.teamGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 25px;
+  justify-content: center;
+}
+
+.memberCard {
+  background-color: #fff;
+  border: 1px solid #FFDCE8;
+  border-radius: 15px;
+  padding: 25px;
+  flex: 1 1 calc(45% - 20px); /* 2 כרטיסים בשורה */
+  min-width: 300px;
+  text-align: left;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+}
+
+.memberCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(214, 51, 132, 0.1);
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 15px;
+}
+
+.memberCard h4 {
+  margin: 0;
+  color: #d63384;
+  font-size: 1.3rem;
+}
+
+.roleTag {
+  background-color: #d63384;
+  color: white;
+  font-size: 0.7rem;
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-weight: bold;
+}
+
+.studiesText {
+  font-size: 0.85rem;
+  color: #53474F;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.bioText {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: #555;
+}

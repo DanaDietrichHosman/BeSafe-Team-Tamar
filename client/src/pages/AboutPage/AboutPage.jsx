@@ -15,16 +15,16 @@ const AboutPage = () => {
       bio: "A driven and curious third-year Software Engineering student with a passion for problem-solving. I thrive in collaborative environments, bringing strong communication skills and a commitment to excellence to every challenge. Joining BeSafe allows me to channel my technical skills into a mission-driven project that prioritizes digital safety and social responsibility."
     },
     {
-      name: "Developer 3",
+      name: "Dana Dietrich Hosman",
       role: "Full-Stack Developer",
-      studies: "B.Sc. Software Engineering Student",
-      bio: "Details coming soon... Focused on using AI to solve social issues and providing parents with smarter safety tools."
+      studies: "B.Sc. Computer Science Student with a minor in Bioinformatics",
+      bio: "A second-year Computer Science student at Ben-Gurion University of the Negev and an active member of the BGRacing community. As a full-stack developer, I’m driven by building smart, efficient systems with real-world impact. Through projects focused on digital protection and anti-cyberbullying initiatives, I aim to use technology as a tool for awareness, safety, and positive online experiences."
     },
     {
-      name: "Developer 4",
+      name: "Michal Zada",
       role: "Full-Stack Developer",
       studies: "B.Sc. Computer Science Student",
-      bio: "Details coming soon... Committed to creating innovative solutions that make the internet a better place for everyone."
+      bio: "A third-year Computer Science student and full-stack developer with a strong focus on building reliable, user-centric systems. I’m passionate about leveraging technology to combat cyberbullying and enhance digital safety. Through mission-driven projects, I combine technical depth, strong communication skills, and a sense of social responsibility to create systems that protect users and promote healthier online communities."
     }
   ];
 

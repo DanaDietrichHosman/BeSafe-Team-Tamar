@@ -1,5 +1,5 @@
 import express from "express";
-import { analyzeText, getUserHistory } from "../controllers/analysisController.js";
+import { analyzeText, getUserHistory, deleteUserHistory } from "../controllers/analysisController.js";
 
 const router = express.Router();
 
@@ -14,5 +14,7 @@ router.post("/analyze", analyzeText);
  * @desc    Fetch analysis history for a specific user
  */
 router.get("/history/:email", getUserHistory);
+
+router.delete("/history/:email", deleteUserHistory);
 
 export default router;

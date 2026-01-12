@@ -22,7 +22,7 @@ export const analyzeText = async (req, res) => {
 
     // 2. Safe extraction of data
     const offensiveWords = analysis?.offensiveWords || [];
-    const RiskLevel = analysis?.RiskLevel || 10; // Normalized to 10
+    const riskValue = analysis?.RiskLevel || analysis?.riskLevel || 0;
     const contextAnalysis = analysis?.contextAnalysis || "Analysis unavailable";
     const recommendation = analysis?.recommendation || "No recommendation";
 
@@ -30,7 +30,7 @@ export const analyzeText = async (req, res) => {
     // We create a single record containing the full analysis details
     const newAnalysisEntry = new Content({
       userEmail: userEmail,
-      RiskLevel: RiskLevel,
+      riskLevel: riskValue,
       contextAnalysis: contextAnalysis,
       recommendation: recommendation,
       analysisData: offensiveWords.map(item => ({
@@ -46,7 +46,8 @@ export const analyzeText = async (req, res) => {
       success: true,
       data: { 
         offensiveWords,
-        RiskLevel,
+        RiskLevel: riskValue, // R גדולה - עבור ResultsSection.jsx
+        riskLevel: riskValue, // אות קטנה - ליתר ביטחון
         contextAnalysis,
         recommendation
       }

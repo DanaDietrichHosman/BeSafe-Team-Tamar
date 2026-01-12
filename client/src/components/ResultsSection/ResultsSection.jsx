@@ -18,11 +18,12 @@ const ResultsSection = () => {
 
   if (!analysisResult || !analysisResult.offensiveWords) return null;
 
-  const { offensiveWords, RiskLevel, contextAnalysis, recommendation } = analysisResult;
+  const { offensiveWords, RiskLevel, riskLevel, contextAnalysis, recommendation } = analysisResult;
   const COLORS = ['#d63384', '#e83e8c', '#f06595', '#ff87b7'];
 
   // נרמול הציון לטווח של 1-10
-  const displayScore = Math.min(Math.max(RiskLevel, 1), 10);
+  const finalRisk = RiskLevel ?? riskLevel ?? 0;
+  const displayScore = Math.min(Math.max(finalRisk, 1), 10);
 
   const getRiskDetails = (score) => {
     if (score >= 8) return { label: "High Risk", color: "#dc3545" }; // אדום

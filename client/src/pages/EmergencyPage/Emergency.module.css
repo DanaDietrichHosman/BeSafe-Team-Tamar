@@ -3,45 +3,76 @@
   max-width: 1000px;
   margin: 0 auto;
   direction: ltr;
+  background-color: #fffafb; /* רקע ורדרד בהיר מאוד לכל הדף */
 }
 
 .emergencyHero {
-  background: linear-gradient(135deg, #d63384, #e91e63);
-  color: white;
-  padding: 50px;
-  border-radius: 20px;
+  /* שינוי מגרדיאנט כהה לגרדיאנט פסטל רך ובהיר */
+  background: linear-gradient(135deg, #ffdce8 0%, #ffebf2 100%); 
+  color: #d63384; /* טקסט כהה על רקע בהיר לקריאות טובה */
+  padding: 60px 40px;
+  border-radius: 30px;
   text-align: center;
   margin-bottom: 50px;
+  border: 1px solid #ffc2d9; /* מסגרת עדינה שתוחמת את התיבה */
+  box-shadow: 0 10px 30px rgba(214, 51, 132, 0.05); /* צל קליל מאוד */
+}
+
+.emergencyHero h1 {
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+  font-weight: 800;
 }
 
 .emergencyBtn {
-  background-color: white;
-  color: #d63384;
-  padding: 15px 30px;
+  background-color: #d63384; /* כפתור בולט אך על רקע בהיר */
+  color: white;
+  padding: 18px 40px;
   border: none;
   border-radius: 50px;
   font-weight: bold;
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   cursor: pointer;
-  margin-top: 20px;
+  margin-top: 25px;
+  box-shadow: 0 8px 20px rgba(214, 51, 132, 0.2);
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.emergencyBtn:hover {
+  background-color: #c22074;
+  transform: scale(1.05); /* אפקט גדילה קטן במיקום העכבר */
 }
 
 .tipsGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
 }
 
 .tipCard {
   background: white;
-  padding: 25px;
-  border-radius: 15px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-  border: 1px solid #eee;
+  padding: 30px;
+  border-radius: 20px;
+  /* צל רך במקום מסגרת כהה */
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.03); 
+  border: 1px solid #f0f0f0;
+  transition: all 0.3s ease;
+}
+
+.tipCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(214, 51, 132, 0.1);
+  border-color: #ffdce8;
 }
 
 .tipIcon {
-  font-size: 2.5rem;
+  font-size: 3rem;
   display: block;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
+  filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+}
+
+.tipCard h3 {
+  color: #53474F;
+  margin-bottom: 10px;
 }
